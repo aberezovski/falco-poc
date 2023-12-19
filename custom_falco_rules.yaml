@@ -1,5 +1,5 @@
 - list: common_processes
-  items: [bash, sh, ls, rm]
+  items: [bash, sh, ls, rm, sleep]
 
 - list: common_event_types
   items: [execve, execveat]
