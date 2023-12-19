@@ -43,7 +43,7 @@ jobs:
       - name: Checkout Rules Repo
         uses: actions/checkout@v3
         with:
-          path: rules
+          path: ./
 
       - name: Upload OCI artifacts to GitHub packages
         run: |
