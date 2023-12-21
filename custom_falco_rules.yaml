@@ -1,3 +1,6 @@
+- list: open_file_dir_event_types
+  items: [open, openat]
+
 - list: common_event_types
   items: [execve, execveat]
 
@@ -8,7 +11,7 @@
   desc: track whenever a set of programs opens a file
   condition: >
     proc.name in (cat, ls) 
-    and evt.type=open
+    and evt.type in (open_file_dir_event_types)
   output: a tracked program opened a file (user=%user.name command=%proc.cmdline file=%fd.name)
   priority: INFO
 
