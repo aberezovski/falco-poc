@@ -4,53 +4,13 @@
 - list: file_readers
   items: [cat]
 
-- rule: Access files with sensitive content
-  desc: >
-    An attempt to read files with sensitive content
+- rule: program_accesses_file
+  desc: track whenever a set of programs opens a file
   condition: >
-    evt.type in (common_event_types) 
-    and evt.dir=<
-    open_read
-    and sensitive_files
-    and proc_name_exists
-    and proc.name in (file_readers)
-  output: Sensitive file opened for reading by known file readers (file=%fd.name gparent=%proc.aname[2] ggparent=%proc.aname[3] gggparent=%proc.aname[4] evt_type=%evt.type user=%user.name user_uid=%user.uid user_loginuid=%user.loginuid process=%proc.name proc_exepath=%proc.exepath parent=%proc.pname command=%proc.cmdline terminal=%proc.tty exe_flags=%evt.arg.flags %container.info)
-  priority: WARNING
-  tags: [access_sensitive_content]
-
-#   
-- macro: container
-  condition: container.id != host
-
-- macro: spawned_process
-  condition: evt.type = execve and evt.dir = <
-
-- list: userexec_binaries
-  items: [sudo, su]
-
-- list: known_binaries
-  items: [shell_binaries, userexec_binaries]
-
-- macro: safe_procs
-  condition: proc.name in (known_binaries)
-
-- list: shell_binaries
-  items: [bash, csh, ksh, sh, tcsh, zsh, dash]
-
-- macro: shell_procs
-  condition: proc.name in (shell_binaries)
-
-- rule: shell_in_container
-  desc: notice shell activity within a container
-  condition: >
-    spawned_process and 
-    container and 
-    shell_procs    
-  output: >
-    shell in a container
-    (user=%user.name container_id=%container.id container_name=%container.name 
-    shell=%proc.name parent=%proc.pname cmdline=%proc.cmdline)    
-  priority: WARNING
+    proc.name in (cat, ls) 
+    and evt.type=open
+  output: a tracked program opened a file (user=%user.name command=%proc.cmdline file=%fd.name)
+  priority: INFO
 
 
 # - list: common_processes
