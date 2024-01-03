@@ -37,14 +37,14 @@
 - list: file_dir_open_programs
   items: [cat, vi, nano]
 
-- rule: program_accesses_file
-  desc: track whenever a set of programs opens a file
-  condition: >
-    evt.type in (open_file_dir_event_types)
-    and evt.dir=<
-    and proc.name in (file_dir_open_programs)
-  output: a tracked program opened a file (user=%user.name command=%proc.cmdline file=%fd.name)
-  priority: WARNING
+# - rule: program_accesses_file
+#   desc: track whenever a set of programs opens a file
+#   condition: >
+#     evt.type in (open_file_dir_event_types)
+#     and evt.dir=<
+#     and proc.name in (file_dir_open_programs)
+#   output: a tracked program opened a file (user=%user.name command=%proc.cmdline file=%fd.name)
+#   priority: WARNING
 
 # - list: common_event_types
 #   items: [execve, execveat]
