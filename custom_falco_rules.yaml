@@ -103,7 +103,8 @@
   enabled: true
   condition: >
     k8s_node
-    and evt.type in (common_event_types) 
+    and evt.type in (common_event_types)
+    and not evt.failed 
     and evt.dir=< 
     and not proc.name in (common_processes)
     and privileged_access_commands
@@ -130,6 +131,7 @@
       terminal=%proc.tty 
       exe_flags=%evt.arg.flags 
       %container.info
+      %evt.info
     )
   priority: WARNING
   tags: [privileged_actions, host]
