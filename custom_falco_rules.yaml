@@ -113,6 +113,7 @@
     process=%proc.name
     command=%proc.cmdline 
     path=%proc.cwd 
+    event=(%evt.res %evt.rawres %evt.failed)
     ( 
       file=%fd.name
       parent=%proc.pname
@@ -131,7 +132,6 @@
       terminal=%proc.tty 
       exe_flags=%evt.arg.flags 
       %container.info
-      %evt.info
     )
   priority: WARNING
   tags: [privileged_actions, host]
