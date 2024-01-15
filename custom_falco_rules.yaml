@@ -95,6 +95,9 @@
     )
   priority: WARNING
 
+- macro: privileged_access_commands
+  condition: proc.aname in (userexec_binaries)
+
 - rule: Privileged actions on K8S Nodes
   desc: Detects execution of privileged actions performed on k8s nodes
   enabled: true
@@ -104,6 +107,7 @@
     and evt.dir=< 
     and not proc.name in (common_processes)
     and non_systemd
+    and privileged_access_commands
   output: >
     Detected privileged action: 
     process=%proc.name 
