@@ -106,7 +106,6 @@
     and evt.type in (common_event_types) 
     and evt.dir=< 
     and not proc.name in (common_processes)
-    and non_systemd
     and privileged_access_commands
   output: >
     Detected privileged action: 
