@@ -109,24 +109,24 @@
     and privileged_access_commands
   output: >
     Detected privileged action: 
-    process=%proc.name 
+    process=%proc.name
     command=%proc.cmdline 
-    parent=%proc.pname 
     path=%proc.cwd 
     ( 
-      file=%fd.name 
-      gparent=%proc.aname[2] 
-      ggparent=%proc.aname[3] 
-      gggparent=%proc.aname[4] 
+      file=%fd.name
+      parent=%proc.pname
+      gparent=%proc.aname[2]
+      ggparent=%proc.aname[3]
+      aname[4]=%proc.aname[4]
+      aname[5]=%proc.aname[5]
+      aname[6]=%proc.aname[6]
+      aname[7]=%proc.aname[7]
       evt_type=%evt.type 
       user=%user.name 
       user_uid=%user.uid 
       user_loginuid=%user.loginuid 
       user_loginname=%user.loginname 
-      process=%proc.name 
-      proc_exepath=%proc.exepath 
-      parent=%proc.pname 
-      command=%proc.cmdline 
+      proc_exepath=%proc.exepath
       terminal=%proc.tty 
       exe_flags=%evt.arg.flags 
       %container.info
