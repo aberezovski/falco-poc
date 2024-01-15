@@ -59,7 +59,7 @@
 
 - rule: Uncommon Process Execution on K8S Nodes
   desc: Detects execution of an uncommon process
-  enabled: true
+  enabled: false
   condition: >
     k8s_node
     and evt.type in (common_event_types) 
