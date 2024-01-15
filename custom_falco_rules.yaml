@@ -56,7 +56,7 @@
   condition: container.id = host
 
 - macro: non_systemd
-  condition: proc.aname != systemd
+  condition: not systemd in (proc.aname)
 
 # Falco custom rules collection
 
