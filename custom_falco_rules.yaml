@@ -52,12 +52,18 @@
 - list: common_processes
   items: [bash, sh, ls, rm, sleep]
 
+- macro: k8s_node
+  condition: container.id = host
+
 # Falco custom rules collection
 
-- rule: Uncommon Process Execution
+- rule: Uncommon Process Execution on K8S Nodes
   desc: Detects execution of an uncommon process
   condition: >
-    evt.type in (common_event_types) and evt.dir=< and not proc.name in (common_processes)
+    k8s_node
+    and evt.type in (common_event_types) 
+    and evt.dir=< 
+    and not proc.name in (common_processes)
   output: >
     Unexpected EXECVE process execution: 
     process=%proc.name 
