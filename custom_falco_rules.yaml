@@ -55,16 +55,20 @@
 - macro: k8s_node
   condition: container.id = host
 
+- macro: non_systemd
+  condition: proc.aname != systemd
+
 # Falco custom rules collection
 
 - rule: Uncommon Process Execution on K8S Nodes
   desc: Detects execution of an uncommon process
-  enabled: false
+  enabled: true
   condition: >
     k8s_node
     and evt.type in (common_event_types) 
     and evt.dir=< 
     and not proc.name in (common_processes)
+    and non_systemd
   output: >
     Unexpected EXECVE process execution: 
     process=%proc.name 
