@@ -115,7 +115,9 @@
     path=%proc.cwd 
     ( 
       file=%fd.name 
-      proc_ancestor=%proc.aname
+      gparent=%proc.aname[2] 
+      ggparent=%proc.aname[3] 
+      gggparent=%proc.aname[4] 
       evt_type=%evt.type 
       user=%user.name 
       user_uid=%user.uid 
