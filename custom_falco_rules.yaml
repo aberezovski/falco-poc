@@ -104,7 +104,7 @@
   condition: >
     k8s_node
     and evt.type in (common_event_types)
-    and not evt.failed 
+    and evt.res=SUCCESS 
     and evt.dir=< 
     and not proc.name in (common_processes)
     and privileged_access_commands
