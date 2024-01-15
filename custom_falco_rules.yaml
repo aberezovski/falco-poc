@@ -164,6 +164,7 @@
 
   # sshd, mail programs attempt to setuid to root even when running as non-root. Excluding here to avoid meaningless FPs
 - rule: Non sudo setuid
+  enabled: false
   desc: >
     Detect attempts to change users through the use of setuid, with exceptions for sudo/su. 
     The users "root" and "nobody" using setuid on themselves are also excluded, as setuid calls in these cases 
