@@ -153,7 +153,7 @@
     and evt.type in (execve, execveat) and evt.dir=<
     and (user.uid = 0 or group.gid = 0) 
     and not system_users
-    and interactive
+    and interactive and proc.tty != 0
     and not proc.name in (cron_binaries)
     and not ansible_running_python
     and not run_by_chef
@@ -185,6 +185,7 @@
   condition: >
     container
     and evt.type in (execve, execveat) and evt.dir=<
+    and proc.tty != 0
     and not container_entrypoint
   output: >
     Detected privileged action on container: 
