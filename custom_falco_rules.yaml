@@ -179,13 +179,15 @@
 #   condition: (not proc.pname exists or proc.pname in (runc:[0:PARENT],
 #     runc:[1:CHILD], runc, docker-runc, exe, docker-runc-cur))
 
+# or not proc.pname in (cilium-agent, netd)
+
 - rule: Privileged actions on containers
   desc: Detects execution of privileged actions performed on containers
   enabled: true
   condition: >
     container
     and evt.type in (execve, execveat) and evt.dir=<
-    and (proc.tty != 0 or not container_entrypoint or not proc.pname in (cilium-agent, netd))
+    and proc.tty != 0
   output: >
     Detected privileged action on container: 
     process=%proc.name
