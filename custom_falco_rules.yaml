@@ -185,7 +185,7 @@
   condition: >
     container
     and evt.type in (execve, execveat) and evt.dir=<
-    and (proc.tty != 0 or not container_entrypoint)
+    and (proc.tty != 0 or not container_entrypoint or not proc.pname in (cilium-agent, netd))
   output: >
     Detected privileged action on container: 
     process=%proc.name
