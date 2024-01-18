@@ -175,9 +175,9 @@
   priority: WARNING
   tags: [privileged_actions, host]
 
-- macro: container_entrypoint
-  condition: (not proc.pname exists or proc.pname in (runc:[0:PARENT],
-    runc:[1:CHILD], runc, docker-runc, exe, docker-runc-cur))
+# - macro: container_entrypoint
+#   condition: (not proc.pname exists or proc.pname in (runc:[0:PARENT],
+#     runc:[1:CHILD], runc, docker-runc, exe, docker-runc-cur))
 
 - rule: Privileged actions on containers
   desc: Detects execution of privileged actions performed on containers
