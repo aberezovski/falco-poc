@@ -185,7 +185,6 @@
   condition: >
     container
     and evt.type in (execve, execveat) and evt.dir=<
-    and proc.tty != 0
     and not container_entrypoint
   output: >
     Detected privileged action on container: 
