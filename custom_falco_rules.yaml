@@ -141,7 +141,7 @@
 
   #########################
 
-  - macro: privileged_access_commands
+- macro: privileged_access_commands
   condition: proc.aname in (userexec_binaries)
 
 - rule: Privileged actions on K8S Nodes
