@@ -52,7 +52,7 @@ jobs:
              --config /dev/null \
              --type rulesfile \
              --version 1.0.0 \
-             --tag 1.0 --tag 1.0 \
+             --tag 1 --tag 1.0 \
              ${OCI_REGISTRY}/${GITHUB_REPOSITORY}/${OCI_ARTIFACT_NAME}:latest \
              ${RULESET_FILE}             
         env:
