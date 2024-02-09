@@ -20,7 +20,6 @@ jobs:
       # look something like ghcr.io/user/repo/custom-rules:main
       OCI_ARTIFACT_NAME: custom-rules
       # OCI_ARTIFACT_VERSION: ${{ github.ref_name }}
-      OCI_ARTIFACT_VERSION: 2
 
     steps:
 
@@ -52,9 +51,9 @@ jobs:
              ${{ github.workspace }}/tools/falcoctl/falcoctl registry push \
              --config /dev/null \
              --type rulesfile \
-             --version ${OCI_ARTIFACT_VERSION} \
-             --tag 2.0 --tag 2.0.0 \
-             ${OCI_REGISTRY}/${GITHUB_REPOSITORY}/${OCI_ARTIFACT_NAME}:${OCI_ARTIFACT_VERSION} \
+             --version 1.0.0 \
+             --tag 1.0 --tag 1.0 \
+             ${OCI_REGISTRY}/${GITHUB_REPOSITORY}/${OCI_ARTIFACT_NAME}:latest \
              ${RULESET_FILE}             
         env:
           FALCOCTL_REGISTRY_AUTH_BASIC: ${{ env.OCI_REGISTRY }},${{ github.repository_owner }},${{ secrets.GITHUB_TOKEN }}
