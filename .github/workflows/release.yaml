@@ -19,7 +19,8 @@ jobs:
       # Assuming we are in the main branch, our OCI artifact will
       # look something like ghcr.io/user/repo/custom-rules:main
       OCI_ARTIFACT_NAME: custom-rules
-      OCI_ARTIFACT_VERSION: ${{ github.ref_name }}
+      # OCI_ARTIFACT_VERSION: ${{ github.ref_name }}
+      OCI_ARTIFACT_VERSION: latest
 
     steps:
 
@@ -52,8 +53,7 @@ jobs:
              --config /dev/null \
              --type rulesfile \
              --version ${OCI_ARTIFACT_VERSION} \
-             --tag 1.0 \
-             --tag 1.0.0 \
+             --tag 1 --tag 1.0 --tag 1.0.0 \
              ${OCI_REGISTRY}/${GITHUB_REPOSITORY}/${OCI_ARTIFACT_NAME}:${OCI_ARTIFACT_VERSION} \
              ${RULESET_FILE}             
         env:
