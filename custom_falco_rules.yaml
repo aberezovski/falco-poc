@@ -31,22 +31,6 @@
 #   priority: NOTICE
 #   tags: [maturity_stable, container, shell, mitre_execution, T1059]
 
-
-- list: open_file_dir_event_types
-  items: [open, openat]
-
-- list: file_dir_open_programs
-  items: [cat, vi, nano]
-
-# - rule: program_accesses_file
-#   desc: track whenever a set of programs opens a file
-#   condition: >
-#     evt.type in (open_file_dir_event_types)
-#     and evt.dir=<
-#     and proc.name in (file_dir_open_programs)
-#   output: a tracked program opened a file (user=%user.name command=%proc.cmdline file=%fd.name)
-#   priority: WARNING
-
 - list: common_event_types
   items: [execve, execveat]
 
@@ -96,23 +80,6 @@
     )
   priority: WARNING
 
-# In containers, the user name might be for a uid that exists in the
-# container but not on the host. (See
-# https://github.com/draios/sysdig/issues/954). So in that case, allow
-# a setuid.
-- macro: known_user_in_container
-  condition: (container and user.name != "N/A")
-
-- macro: somebody_becoming_themselves
-  condition: ((user.name=nobody and evt.arg.uid=nobody) or
-              (user.name=www-data and evt.arg.uid=www-data) or
-              (user.name=_apt and evt.arg.uid=_apt) or
-              (user.name=postfix and evt.arg.uid=postfix) or
-              (user.name=pki-agent and evt.arg.uid=pki-agent) or
-              (user.name=pki-acme and evt.arg.uid=pki-acme) or
-              (user.name=nfsnobody and evt.arg.uid=nfsnobody) or
-              (user.name=postgres and evt.arg.uid=postgres))
-
 # Add conditions to this macro (probably in a separate file,
 # overwriting this macro) to allow for specific combinations of
 # programs changing users by calling setuid.
@@ -141,9 +108,6 @@
   tags: [maturity_incubating, host, container, users, mitre_privilege_escalation, T1548.001]
 
 #########################
-
-- macro: privileged_access_commands
-  condition: proc.aname in (userexec_binaries)
 
 - rule: Privileged actions on hosts
   desc: Detects execution of privileged actions performed on hosts
