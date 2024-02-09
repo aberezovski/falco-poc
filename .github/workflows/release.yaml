@@ -47,7 +47,7 @@ jobs:
           path: rules
 
       - name: Get Short GitHub SHA and Save in Environment Variable
-        run: echo "SHORT_GITHUB_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        run: echo "GITHUB_SHA_SHORT=$(echo $GITHUB_SHA | cut -c 1-6)" >> $GITHUB_ENV
 
       - name: Upload OCI artifacts to GitHub packages
         working-directory: '${{ github.workspace }}/rules'
@@ -56,7 +56,7 @@ jobs:
              --config /dev/null \
              --type rulesfile \
              --version ${OCI_ARTIFACT_VERSION} \
-             --tag ${OCI_ARTIFACT_VERSION} --tag ${SHORT_GITHUB_SHA} \
+             --tag ${OCI_ARTIFACT_VERSION} --tag ${GITHUB_SHA_SHORT} \
              ${OCI_REGISTRY}/${GITHUB_REPOSITORY}/${OCI_ARTIFACT_NAME}:latest \
              ${RULESET_FILE}             
         env:
