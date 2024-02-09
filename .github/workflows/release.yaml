@@ -52,6 +52,8 @@ jobs:
              --config /dev/null \
              --type rulesfile \
              --version ${OCI_ARTIFACT_VERSION} \
+             --tag 1.0 \
+             --tag 1.0.0 \
              ${OCI_REGISTRY}/${GITHUB_REPOSITORY}/${OCI_ARTIFACT_NAME}:${OCI_ARTIFACT_VERSION} \
              ${RULESET_FILE}             
         env:
