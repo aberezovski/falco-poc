@@ -109,12 +109,6 @@
   priority: WARNING
   tags: [privileged_actions, host]
 
-# - macro: container_entrypoint
-#   condition: (not proc.pname exists or proc.pname in (runc:[0:PARENT],
-#     runc:[1:CHILD], runc, docker-runc, exe, docker-runc-cur))
-
-# or not proc.pname in (cilium-agent, netd)
-
 - rule: Privileged actions on containers
   desc: Detects execution of privileged actions performed on containers
   enabled: true
