@@ -21,6 +21,7 @@ jobs:
       OCI_ARTIFACT_NAME: custom-rules
       # OCI_ARTIFACT_VERSION: ${{ github.ref_name }}
       OCI_ARTIFACT_VERSION: 1.0.1
+      GITHUB_SHORT_COMMIT_HASH: ${{git rev-parse --short "$GITHUB_SHA"}}
 
     steps:
 
@@ -53,7 +54,7 @@ jobs:
              --config /dev/null \
              --type rulesfile \
              --version ${OCI_ARTIFACT_VERSION} \
-             --tag ${OCI_ARTIFACT_VERSION} \
+             --tag ${OCI_ARTIFACT_VERSION} --tag ${GITHUB_SHORT_COMMIT_HASH} \
              ${OCI_REGISTRY}/${GITHUB_REPOSITORY}/${OCI_ARTIFACT_NAME}:latest \
              ${RULESET_FILE}             
         env:
