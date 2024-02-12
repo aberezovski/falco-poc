@@ -4,9 +4,6 @@
 - list: common_processes
   items: [bash, sh, ls, rm, sleep]
 
-- macro: non_systemd
-  condition: not (proc.aname = systemd)
-
 # Falco custom rules collection
 
 - rule: Uncommon Process Execution on K8S Nodes
@@ -17,7 +14,7 @@
     and evt.type in (execve, execveat) 
     and evt.dir=< 
     and not proc.name in (common_processes)
-    and non_systemd
+    and not (proc.aname = systemd)
   output: >
     Unexpected EXECVE process execution: 
     process=%proc.name 
