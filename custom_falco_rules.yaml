@@ -7,9 +7,6 @@
 - list: common_processes
   items: [bash, sh, ls, rm, sleep]
 
-- macro: k8s_node
-  condition: container.id = host
-
 - macro: non_systemd
   condition: not (proc.aname = systemd)
 
@@ -19,7 +16,7 @@
   desc: Detects execution of an uncommon process
   enabled: false
   condition: >
-    k8s_node
+    container.id = host
     and evt.type in (common_event_types) 
     and evt.dir=< 
     and not proc.name in (common_processes)
@@ -69,7 +66,7 @@
     different user's context, potentially with higher privileges. One drawback is the potential for noise, 
     as many applications legitimately use this approach.
   condition: >
-    k8s_node
+    container.id = host
     and evt.type=setuid and evt.dir=>
     and not (user.name=root or user.uid=0)
     and not user_known_non_sudo_setuid_conditions
@@ -83,7 +80,7 @@
   desc: Detects execution of privileged actions performed on hosts
   enabled: true
   condition: >
-    k8s_node
+    container.id = host
     and evt.type in (execve, execveat) and evt.dir=<
     and (user.uid = 0 or group.gid = 0) 
     and not system_users
