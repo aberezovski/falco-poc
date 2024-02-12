@@ -1,9 +1,6 @@
 - list: shell_binaries
   items: [ash, bash, csh, ksh, sh, tcsh, zsh, dash]
 
-- list: common_event_types
-  items: [execve, execveat]
-
 - list: common_processes
   items: [bash, sh, ls, rm, sleep]
 
@@ -17,7 +14,7 @@
   enabled: false
   condition: >
     container.id = host
-    and evt.type in (common_event_types) 
+    and evt.type in (execve, execveat) 
     and evt.dir=< 
     and not proc.name in (common_processes)
     and non_systemd
