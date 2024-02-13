@@ -2,13 +2,13 @@
   items: [ash, bash, csh, ksh, sh, tcsh, zsh, dash]
 
 - list: common_processes
-  items: [bash, sh, ls, rm, sleep]
+  items: [bash, sh, ls, rm, sleep, cat, nano, curl, wget]
 
 # Falco custom rules collection
 
 - rule: Uncommon Process Execution on K8S Nodes
   desc: Detects execution of an uncommon process
-  enabled: false
+  enabled: true
   condition: >
     container.id = host
     and evt.type in (execve, execveat) 
