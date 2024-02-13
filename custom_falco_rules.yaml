@@ -8,7 +8,7 @@
 
 - rule: Uncommon Process Execution on K8S Nodes
   desc: Detects execution of an uncommon process
-  enabled: true
+  enabled: false
   condition: >
     container.id = host
     and evt.type in (execve, execveat) 

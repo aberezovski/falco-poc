@@ -20,7 +20,7 @@ jobs:
       # look something like ghcr.io/user/repo/custom-rules:main
       OCI_ARTIFACT_NAME: custom-rules
       # OCI_ARTIFACT_VERSION: ${{ github.ref_name }}
-      OCI_ARTIFACT_VERSION: 2.0.2
+      OCI_ARTIFACT_VERSION: 2.0.3
 
     steps:
 
