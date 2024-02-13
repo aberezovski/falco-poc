@@ -57,7 +57,7 @@ jobs:
              --type rulesfile \
              --version ${OCI_ARTIFACT_VERSION} \
              --tag ${OCI_ARTIFACT_VERSION} --tag ${GITHUB_SHA_SHORT} \
-             ${OCI_REGISTRY}/${GITHUB_REPOSITORY}/${OCI_ARTIFACT_NAME}:latest \
+             ${OCI_REGISTRY}/${GITHUB_REPOSITORY}/${OCI_ARTIFACT_NAME}:${OCI_ARTIFACT_VERSION} \
              ${RULESET_FILE}             
         env:
           FALCOCTL_REGISTRY_AUTH_BASIC: ${{ env.OCI_REGISTRY }},${{ github.repository_owner }},${{ secrets.GITHUB_TOKEN }}
