@@ -14,7 +14,6 @@
     and evt.type in (execve, execveat) 
     and evt.dir=< 
     and not proc.name in (common_processes)
-    and not (proc.aname = systemd)
   output: >
     Unexpected EXECVE process execution: 
     process=%proc.name 
