@@ -2,7 +2,7 @@
   items: [ash, bash, csh, ksh, sh, tcsh, zsh, dash]
 
 - list: common_processes
-  items: [bash, sh, ls, rm, sleep, cat, nano, curl, wget]
+  items: [bash, sh, ls, rm, sleep]
 
 # Falco custom rules collection
 
