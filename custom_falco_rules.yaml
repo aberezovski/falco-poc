@@ -71,7 +71,7 @@
 
 - rule: Privileged actions on hosts
   desc: Detects execution of privileged actions performed on hosts
-  enabled: false
+  enabled: true
   condition: >
     container.id = host
     and evt.type in (execve, execveat) and evt.dir=<
